@@ -1,0 +1,9 @@
+# System generated files
+.DS_Store
+desktop.init
+
+# Environment variables
+.env
+
+# Local database exports / backups
+database/backup-*.sql
