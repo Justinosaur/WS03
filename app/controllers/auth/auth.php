@@ -1,7 +1,17 @@
 <?php
 
-function loginUser($email, $password)
+/**
+ * Attempt to authenticate a user by email and password.
+ *
+ * @param string $email
+ * @param string $password
+ * @return bool True on success, false on failure
+ */
+function loginUser(string $email, string $password): bool
 {
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
     $config = require basePath('config/db.php');
     $db = new Database($config);
 
@@ -26,7 +36,16 @@ function loginUser($email, $password)
     return true;
 }
 
-function registerUser($name, $email, $password)
+/**
+ * Register a new user and return the new user's ID.
+ *
+ * @param string $name
+ * @param string $email
+ * @param string $password
+ * @return int Inserted user ID
+ * @throws Exception If email is already registered or query fails
+ */
+function registerUser(string $name, string $email, string $password): int
 {
     $config = require basePath('config/db.php');
     $db = new Database($config);
